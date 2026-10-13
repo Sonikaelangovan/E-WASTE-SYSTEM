@@ -1,6 +1,9 @@
 pipeline {
   agent any
   options { timestamps(); disableConcurrentBuilds() }
+  environment {
+    PATH+DOCKER = 'C:\\Users\\thira\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin'
+  }
   parameters {
     booleanParam(name: 'DEPLOY', defaultValue: false, description: 'Build and run the local Docker service after tests')
     string(name: 'ENV_FILE', defaultValue: 'C:\\Users\\thira\\Flight_Management\\E-Waste-System\\.env', description: 'Private environment file on this Jenkins agent')
