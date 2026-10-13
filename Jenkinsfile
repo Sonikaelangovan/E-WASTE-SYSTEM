@@ -3,6 +3,7 @@ pipeline {
   options { timestamps(); disableConcurrentBuilds() }
   environment {
     DOCKER_BIN = 'C:\\Users\\thira\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe'
+    COMPOSE_BIN = 'C:\\Users\\thira\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker-compose.exe'
   }
   parameters {
     booleanParam(name: 'DEPLOY', defaultValue: false, description: 'Build and run the local Docker service after tests')
@@ -17,16 +18,16 @@ pipeline {
       when { expression { return params.DEPLOY } }
       steps {
         bat '@if not exist "%ENV_FILE%" (echo Missing private environment file & exit /b 1)'
-        bat '"%DOCKER_BIN%" --version && "%DOCKER_BIN%" compose version'
+        bat '"%DOCKER_BIN%" --version && "%COMPOSE_BIN%" version'
       }
     }
     stage('Docker Build') {
       when { expression { return params.DEPLOY } }
-      steps { bat '"%DOCKER_BIN%" compose --env-file "%ENV_FILE%" build' }
+      steps { bat '"%COMPOSE_BIN%" --env-file "%ENV_FILE%" build' }
     }
     stage('Deploy') {
       when { expression { return params.DEPLOY } }
-      steps { bat '"%DOCKER_BIN%" compose --env-file "%ENV_FILE%" up -d --wait && "%DOCKER_BIN%" compose --env-file "%ENV_FILE%" ps' }
+      steps { bat '"%COMPOSE_BIN%" --env-file "%ENV_FILE%" up -d --wait && "%COMPOSE_BIN%" --env-file "%ENV_FILE%" ps' }
     }
     stage('Health Check') {
       when { expression { return params.DEPLOY } }
