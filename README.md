@@ -47,7 +47,11 @@ The second run should report `changed=0`. Pass `-e force_build=true` to rebuild 
 
 ## Jenkins
 
-Create a Pipeline job using `https://github.com/Sonikaelangovan/E-WASTE-SYSTEM.git`, branch `main`, script path `Jenkinsfile`. The default `DEPLOY=false` runs checkout, syntax checks and all tests. `DEPLOY=true` additionally builds and starts Docker using the private `ENV_FILE` on the Jenkins agent and checks port 8092. The private file is not committed or copied into the build context.
+The configured job is <http://localhost:8080/job/E-Waste-System-Pipeline/>. It uses `https://github.com/Sonikaelangovan/E-WASTE-SYSTEM.git`, branch `main`, script path `Jenkinsfile`, and polls GitHub every 15 minutes while Jenkins is running. The default `DEPLOY=false` runs checkout, syntax checks and all tests. `DEPLOY=true` additionally builds and starts Docker using the private `ENV_FILE` on the Jenkins agent and checks port 8092. Build #5 passed all stages. The private file is not committed or copied into the build context. The Docker and Compose paths in `Jenkinsfile` are specific to this laptop and must be changed for another agent.
+
+## Screenshot evidence
+
+The ignored `screenshots/` folder on this laptop contains real browser captures of the application and terminal-style images rendered from successful local Docker, Ansible and test command output. To refresh them, set `ECOTRACE_PLAYWRIGHT_MODULE` to the installed Playwright module path and run `node scripts/capture-evidence.cjs` followed by `node scripts/capture-operations.cjs`. The first script creates clearly labeled demonstration pickup records; neither script publishes credentials.
 
 ## Operational notes
 
