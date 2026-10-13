@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#123a32">
+  <meta name="description" content="Request responsible e-waste collection, track every handoff and verify recycling with EcoTrace.">
+  <title>EcoTrace — E-Waste Collection & Traceability</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="topline"><span>RESPONSIBLE DISPOSAL, VISIBLE IMPACT</span><span>CHENNAI • COLLECTION & RECYCLING NETWORK</span></div>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="EcoTrace home"><span class="brand-mark" aria-hidden="true">↻</span><span>ECO<span>TRACE</span><small>EWASTE MANAGEMENT</small></span></a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="#how">How it works</a><a href="#categories">What we collect</a><a href="#centers">Centers</a><a href="#track">Track pickup</a>
+    </nav>
+    <div class="header-actions"><button class="text-button" id="nav-account" type="button">Sign in</button><button class="button button-dark" id="nav-primary" type="button">Schedule a pickup <span aria-hidden="true">↗</span></button></div>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false" type="button">☰</button>
+  </header>
+
+  <main id="home">
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-copy"><div class="eyebrow"><span class="eyebrow-dot"></span> A SMARTER WAY TO CLOSE THE LOOP</div>
+        <h1 id="hero-heading">Your electronics<br>deserve a <em>better</em><br>next chapter.</h1>
+        <p>Book an e-waste pickup in minutes. Follow every handoff from your doorstep to responsible recycling — with proof you can verify.</p>
+        <div class="hero-actions"><button class="button button-lime" id="hero-book" type="button">Book free pickup <span aria-hidden="true">↗</span></button><a class="button button-outline" href="#track">Track an item <span aria-hidden="true">→</span></a></div>
+        <div class="hero-proof"><span class="proof-icons" aria-hidden="true">◉ ◉ ◉</span><span>Collection · Traceability · Recycling</span></div>
+      </div>
+      <div class="hero-art" role="img" aria-label="Illustration of devices moving through collection, sorting and recycling">
+        <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+        <div class="art-card card-phone"><span class="art-label">01 / COLLECT</span><div class="phone-outline"><div class="phone-screen">↗</div></div><span class="art-card-sub">From your doorstep</span></div>
+        <div class="art-card card-trace"><span class="art-label">02 / TRACE</span><div class="trace-line"><i></i><i></i><i></i></div><strong>Every step,<br>accounted for.</strong></div>
+        <div class="art-card card-recycle"><span class="art-label">03 / RECYCLE</span><span class="recycle-symbol">♻</span><span class="art-card-sub">A circular future</span></div>
+        <div class="art-stamp">LESS WASTE<br><strong>MORE FUTURE</strong></div>
+      </div>
+    </section>
+
+    <section class="impact-strip" aria-label="Service highlights"><div><strong>01</strong><span>Request a doorstep pickup</span></div><div><strong>02</strong><span>Track each handoff</span></div><div><strong>03</strong><span>See recycling proof</span></div><p>GOOD FOR YOUR SPACE. BETTER FOR THE PLANET. <span>✳</span></p></section>
+
+    <section class="section section-how" id="how"><div class="section-heading"><div><span class="kicker">THE PROCESS</span><h2>Simple for you.<br><em>Accountable</em> at every step.</h2></div><p>Our digital chain of custody makes an old device’s journey easy to follow — from collection request to recycling certificate.</p></div><div class="process-grid"><article class="process-card"><span class="step-no">01 / REQUEST</span><div class="process-icon">▣</div><h3>Tell us what you have</h3><p>Choose a category, describe your items and select a convenient collection date.</p></article><article class="process-card"><span class="step-no">02 / COLLECT</span><div class="process-icon">↗</div><h3>We pick it up</h3><p>A collection partner accepts the assignment and records the doorstep handoff.</p></article><article class="process-card"><span class="step-no">03 / VERIFY</span><div class="process-icon">◎</div><h3>Follow the journey</h3><p>Track status updates as your electronics arrive at a recycling center.</p></article><article class="process-card"><span class="step-no">04 / RECYCLE</span><div class="process-icon">♻</div><h3>Close the loop</h3><p>Once processed, view the recorded weight, method and digital certificate number.</p></article></div></section>
+
+    <section class="section section-categories" id="categories"><div class="section-heading"><div><span class="kicker">WHAT WE COLLECT</span><h2>Give obsolete tech<br>a <em>useful future.</em></h2></div><p>From the smallest cable to a retired computer, these categories can be scheduled for collection.</p></div><div class="category-grid" id="category-grid"></div></section>
+
+    <section class="section trace-section" id="track"><div class="trace-copy"><span class="kicker">TRACK YOUR IMPACT</span><h2>One code.<br><em>The whole story.</em></h2><p>Enter your EcoTrace tracking code to see where your items are in the collection and recycling journey. Personal address details stay private.</p><form id="track-form" class="track-form"><label for="track-code">TRACKING CODE</label><div><input id="track-code" name="code" placeholder="EWT-2026-XXXXXXXX" required autocomplete="off"><button class="button button-lime" type="submit">Track now →</button></div></form></div><div class="trace-graphic"><div class="trace-graphic-top"><span>TRANSPARENCY IN MOTION</span><span>↗</span></div><div class="trace-graphic-center"><div class="trace-check">✓</div><h3>Every handoff<br>leaves a trace.</h3><p>REQUESTED → COLLECTED → RECYCLED</p></div><div class="trace-graphic-bottom">CHAIN OF CUSTODY • VERIFIED DIGITAL RECORD</div></div></section>
+
+    <section class="section centers-section" id="centers"><div class="section-heading"><div><span class="kicker">OUR NETWORK</span><h2>Local collection.<br><em>Lasting change.</em></h2></div><p>Find a collection or recycling center in our demonstration network.</p></div><div class="center-grid" id="center-grid"></div></section>
+
+    <section class="closing"><span class="kicker">READY TO START?</span><h2>Make your next move<br>a <em>circular one.</em></h2><button class="button button-lime" id="closing-book" type="button">Schedule a pickup ↗</button></section>
+  </main>
+
+  <footer class="site-footer"><div class="footer-brand">ECO<span>TRACE</span><small>EWASTE COLLECTION · RECYCLING · TRACEABILITY</small></div><p>A student demonstration of a transparent e-waste journey. No live payment or regulatory certification is implied.</p><span>© <span id="year"></span> ECOTRACE PROJECT</span></footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <div id="modal" class="modal hidden" aria-hidden="true"><div class="modal-backdrop" data-close="modal"></div><div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title"><button class="modal-close" data-close="modal" type="button" aria-label="Close">×</button><div id="modal-content"></div></div></div>
+</body>
+</html>
