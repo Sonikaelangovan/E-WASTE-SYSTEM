@@ -1,0 +1,75 @@
+---
+- name: Reconcile EcoTrace e-waste service on Docker Desktop
+  hosts: local
+  gather_facts: false
+  vars:
+    project_dir: "{{ playbook_dir }}/.."
+    app_image: e-waste-system-app:latest
+    force_build: false
+  tasks:
+    - name: Check deployment files
+      ansible.builtin.stat:
+        path: "{{ project_dir }}/{{ item }}"
+      loop:
+        - Dockerfile
+        - docker-compose.yml
+        - .env
+      register: deployment_files
+
+    - name: Require the deployment files
+      ansible.builtin.assert:
+        that:
+          - deployment_files.results | selectattr('stat.exists', 'equalto', false) | list | length == 0
+        fail_msg: Create a private .env from .env.example before deploying.
+
+    - name: Validate Docker Compose configuration
+      ansible.builtin.command: docker compose config --quiet
+      args:
+        chdir: "{{ project_dir }}"
+      changed_when: false
+      no_log: true
+
+    - name: Check for application image
+      ansible.builtin.command: "docker image inspect {{ app_image }}"
+      register: image_check
+      failed_when: false
+      changed_when: false
+
+    - name: Build image when absent or requested
+      ansible.builtin.command: docker compose build
+      args:
+        chdir: "{{ project_dir }}"
+      when: image_check.rc != 0 or force_build | bool
+
+    - name: Ensure service is running and healthy
+      ansible.builtin.command: docker compose up -d --wait
+      args:
+        chdir: "{{ project_dir }}"
+      register: compose_up
+      changed_when: >-
+        'Created' in compose_up.stderr or
+        'Started' in compose_up.stderr or
+        'Recreated' in compose_up.stderr or
+        'Recreating' in compose_up.stderr
+
+    - name: Check the application health endpoint
+      ansible.builtin.uri:
+        url: http://127.0.0.1:8092/api/health
+        status_code: 200
+        return_content: true
+      register: health
+      retries: 10
+      delay: 3
+      until: health.json.status | default('') == 'ok'
+      changed_when: false
+
+    - name: Show Docker service status
+      ansible.builtin.command: docker compose ps
+      args:
+        chdir: "{{ project_dir }}"
+      register: services
+      changed_when: false
+
+    - name: Display final state
+      ansible.builtin.debug:
+        msg: "{{ services.stdout_lines }}"
