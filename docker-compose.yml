@@ -1,0 +1,21 @@
+name: e-waste-system
+services:
+  app:
+    build: .
+    image: e-waste-system-app:latest
+    restart: unless-stopped
+    ports:
+      - "8092:8092"
+    environment:
+      PORT: "8092"
+      DATA_DIR: /app/data
+      ADMIN_EMAIL: ${ADMIN_EMAIL:?Set ADMIN_EMAIL in .env}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?Set ADMIN_PASSWORD in .env}
+      COLLECTOR_EMAIL: ${COLLECTOR_EMAIL:?Set COLLECTOR_EMAIL in .env}
+      COLLECTOR_PASSWORD: ${COLLECTOR_PASSWORD:?Set COLLECTOR_PASSWORD in .env}
+      RECYCLER_EMAIL: ${RECYCLER_EMAIL:?Set RECYCLER_EMAIL in .env}
+      RECYCLER_PASSWORD: ${RECYCLER_PASSWORD:?Set RECYCLER_PASSWORD in .env}
+    volumes:
+      - ewaste-data:/app/data
+volumes:
+  ewaste-data:
